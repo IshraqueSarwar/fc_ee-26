@@ -1,0 +1,29 @@
+1. Go to STMcubeMX and enable the RCC-crystal timer from system core.
+2. from connectivity section, we need to enable USB_OTG_FS to Device only,
+3. for the gyro, we need to set pa4-7
+	Pin,Function,CubeMX Setting
+	PA4,Chip Select (CS),GPIO_Output -> GYRO_CS
+	PA5,Clock (SCK),SPI1_SCK (Auto-set)-> GYRO_SCL
+	PA6,Master In Slave Out (MISO),SPI1_MISO (Auto-set)->GYRO_SDO
+	PA7,Master Out Slave In (MOSI),SPI1_MOSI (Auto-set)->GYRO_SDA
+	PC4 - GPIO_EXTI - GYRO_INT
+
+4. The analogue inputs:
+	pc1 - VBAT_PAD(for battery pct check) - ADC_IN11
+	pc2 - RSSI_PAD(for radio signal) - ADC_IN12
+	pc3 - CURRENT_PAD(from current sensor) - ADC_IN13
+	pc5 - 5C_USB(detect usb with 2 10k resistor, one grounded) - ADC_IN15
+
+
+5. radio reciever input -  PPM_IN - TIM3_CH3/TIM8_CH3, if software based decoder(GPIO_EXTI)7
+
+6. I2C com - 
+	PB6 - SCL_PAD(serial clock with 10k resis) - I2C1_SCL
+	PB7 - SDA_PAD(serial data with 10k resis) - I2C1_SDA
+
+7. (optional) if we want to communicate telem via UART, we can enable
+	USART,
+	the UART we enable under connectivity are 
+	1. USART1
+	2. USART3
+	3. USART6
